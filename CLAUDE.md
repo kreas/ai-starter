@@ -50,3 +50,14 @@ Before building or modifying any UI (pages, components, layouts), **always read 
 - Use React Testing Library for component tests — test behavior and user interactions, not implementation details
 - Use `vitest` directly for utility/logic tests
 - Run `pnpm test` to verify all tests pass before committing
+
+## Agent Teams
+Agent teams are enabled for this project. When working as a team:
+- **File ownership**: Each teammate should own distinct files — never have two teammates editing the same file
+- **Task sizing**: Break work into self-contained units that produce a clear deliverable (a component, a route, a test file)
+- **Recommended team structures**:
+  - **Feature work**: one teammate per layer (frontend component, API route, tests)
+  - **Code review**: split reviewers by concern (security, performance, test coverage)
+  - **Debugging**: assign competing hypotheses to different teammates
+- **All teammates must follow project conventions**: this CLAUDE.md applies to every teammate, including design inspirations, testing requirements, and commit practices
+- **Run tests before reporting done**: teammates should run `pnpm test` and `pnpm build` to verify their work before marking tasks complete
