@@ -9,6 +9,8 @@
 - `pnpm db:migrate` — Run Drizzle migrations
 - `pnpm db:push` — Push schema to database
 - `pnpm db:studio` — Open Drizzle Studio
+- `pnpm test` — Run tests (Vitest)
+- `pnpm test:watch` — Run tests in watch mode
 
 ## Architecture
 - **Framework**: Next.js 15 (App Router, TypeScript, Turbopack)
@@ -17,6 +19,7 @@
 - **Storage**: Cloudflare R2 (via AWS SDK v3)
 - **Auth**: WorkOS AuthKit
 - **AI**: Vercel AI SDK + Anthropic (`@ai-sdk/anthropic`)
+- **Testing**: Vitest + React Testing Library
 
 ## Project Structure
 - `src/app/` — Next.js App Router pages and layouts
@@ -40,3 +43,10 @@ Before building or modifying any UI (pages, components, layouts), **always read 
   - Import pattern: `import { Component } from "@/components/ai-elements/component-name"`
 - Database schema lives in `src/db/schema.ts`
 - Environment variables in `.env.local` (see `.env.example` for template)
+
+## Testing
+- **Every component must have a test file.** When creating or modifying a component, always create or update a corresponding `.test.tsx` file alongside it.
+- Test files live next to the code they test: `ComponentName.tsx` → `ComponentName.test.tsx`
+- Use React Testing Library for component tests — test behavior and user interactions, not implementation details
+- Use `vitest` directly for utility/logic tests
+- Run `pnpm test` to verify all tests pass before committing
