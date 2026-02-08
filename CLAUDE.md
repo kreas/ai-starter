@@ -19,6 +19,7 @@
 - **Storage**: Cloudflare R2 (via AWS SDK v3)
 - **Auth**: WorkOS AuthKit
 - **AI**: Vercel AI SDK + Anthropic (`@ai-sdk/anthropic`)
+- **Data Fetching**: TanStack Query (`@tanstack/react-query`)
 - **Testing**: Vitest + React Testing Library
 
 ## Project Structure
@@ -43,6 +44,13 @@ Before building or modifying any UI (pages, components, layouts), **always read 
   - Import pattern: `import { Component } from "@/components/ai-elements/component-name"`
 - Database schema lives in `src/db/schema.ts`
 - Environment variables in `.env.local` (see `.env.example` for template)
+
+## Data Fetching
+- **Use TanStack Query for all client-side API calls.** Do not use server actions.
+- Use `useQuery` for GET requests (reading data)
+- Use `useMutation` for POST/PUT/DELETE requests (writing data), with `queryClient.invalidateQueries` to refresh related data after mutations
+- API routes live in `src/app/api/` and return JSON — TanStack Query calls these via `fetch`
+- The `QueryClientProvider` is already set up in `src/components/providers.tsx`
 
 ## Testing
 - **Every component must have a test file.** When creating or modifying a component, always create or update a corresponding `.test.tsx` file alongside it.
