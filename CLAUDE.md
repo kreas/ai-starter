@@ -30,5 +30,10 @@
 - Use `src/` directory for all application code
 - Import alias: `@/` maps to `src/`
 - Use ShadCN components via `pnpm dlx shadcn@latest add <component>`
+- Use [AI Elements](https://github.com/vercel/ai-elements) for all AI-related UI (chat, messages, code blocks, reasoning, etc.)
+  - Install components: `pnpm dlx shadcn@latest add https://elements.ai-sdk.dev/api/registry/<component>.json`
+  - Install all: `pnpm dlx shadcn@latest add https://elements.ai-sdk.dev/api/registry/all.json`
+  - Components live in `src/components/ai-elements/`
+  - Import pattern: `import { Component } from "@/components/ai-elements/component-name"`
 - Database schema lives in `src/db/schema.ts`
 - Environment variables in `.env.local` (see `.env.example` for template)
