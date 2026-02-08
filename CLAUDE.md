@@ -16,6 +16,7 @@
 - **Database**: Drizzle ORM + Turso (libsql/SQLite)
 - **Storage**: Cloudflare R2 (via AWS SDK v3)
 - **Auth**: WorkOS AuthKit
+- **AI**: Vercel AI SDK + Anthropic (`@ai-sdk/anthropic`)
 
 ## Project Structure
 - `src/app/` — Next.js App Router pages and layouts

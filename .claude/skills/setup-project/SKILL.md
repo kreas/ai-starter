@@ -61,6 +61,13 @@ openssl rand -base64 24
 
 **Important:** Remind the user to add `http://localhost:3000/callback` as an allowed redirect URI in their WorkOS dashboard.
 
+### 2d: Anthropic
+
+Ask the user for their Anthropic API key. They can get one at https://console.anthropic.com/.
+
+Set this value in `.env.local`:
+- `ANTHROPIC_API_KEY` — starts with `sk-ant-`
+
 ## Step 3: Push database schema
 
 ```bash

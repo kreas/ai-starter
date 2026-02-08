@@ -9,6 +9,7 @@ A Next.js 15 starter template with authentication, database, file storage, and a
 - **Database:** Drizzle ORM + Turso (libsql/SQLite)
 - **Storage:** Cloudflare R2
 - **Auth:** WorkOS AuthKit
+- **AI:** Vercel AI SDK + Anthropic
 
 ## Prerequisites
 
@@ -17,6 +18,7 @@ A Next.js 15 starter template with authentication, database, file storage, and a
 - A [Turso](https://turso.tech/) database
 - A [Cloudflare](https://dash.cloudflare.com/) account with an R2 bucket
 - A [WorkOS](https://workos.com/) account with AuthKit configured
+- An [Anthropic](https://console.anthropic.com/) API key
 
 ## Setup
 
@@ -69,6 +71,14 @@ NEXT_PUBLIC_WORKOS_REDIRECT_URI=http://localhost:3000/callback
 
 Add `http://localhost:3000/callback` as an allowed redirect URI in your WorkOS dashboard under AuthKit > Redirects.
 
+#### Anthropic
+
+Get an API key from the [Anthropic Console](https://console.anthropic.com/), then set:
+
+```
+ANTHROPIC_API_KEY=sk-ant-...
+```
+
 ### 3. Push the database schema
 
 ```bash
@@ -101,6 +111,7 @@ Open [http://localhost:3000](http://localhost:3000) — you should see the landi
 ```
 src/
 ├── app/                # Next.js App Router pages and layouts
+│   ├── api/chat/       # AI chat API route (streaming)
 │   ├── callback/       # WorkOS auth callback route
 │   ├── globals.css     # Tailwind + ShadCN theme
 │   ├── layout.tsx      # Root layout
