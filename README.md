@@ -152,6 +152,18 @@ pnpm dlx shadcn@latest add button
 pnpm dlx shadcn@latest add https://elements.ai-sdk.dev/api/registry/conversation.json
 ```
 
+## Creating a Workspace
+
+Use the `create-workspace` script to spin up an isolated [git worktree](https://git-scm.com/docs/git-worktree) for a new feature. It creates a worktree at `.worktrees/<name>` on branch `feature/<name>`, copies `.env.local`, installs dependencies, runs migrations, and launches Claude Code.
+
+```bash
+# Create worktree and launch Claude Code
+scripts/create-workspace.sh my-feature
+
+# Create worktree without launching Claude
+scripts/create-workspace.sh my-feature --no-claude
+```
+
 ## Claude Code Skills
 
 This project includes Claude Code skills for common workflows:
