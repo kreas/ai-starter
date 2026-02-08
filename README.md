@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Starter
 
-## Getting Started
+A Next.js 15 starter template with authentication, database, file storage, and a component library pre-configured.
 
-First, run the development server:
+## Tech Stack
+
+- **Framework:** Next.js 15 (App Router, TypeScript, Turbopack)
+- **Styling:** Tailwind CSS v4 + ShadCN UI
+- **Database:** Drizzle ORM + Turso (libsql/SQLite)
+- **Storage:** Cloudflare R2
+- **Auth:** WorkOS AuthKit
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) 18+
+- [pnpm](https://pnpm.io/) package manager
+- A [Turso](https://turso.tech/) database
+- A [Cloudflare](https://dash.cloudflare.com/) account with an R2 bucket
+- A [WorkOS](https://workos.com/) account with AuthKit configured
+
+## Setup
+
+### 1. Install dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Configure environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copy the example env file:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cp .env.example .env.local
+```
 
-## Learn More
+Fill in your credentials in `.env.local`:
 
-To learn more about Next.js, take a look at the following resources:
+#### Turso
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create a database at [turso.tech](https://turso.tech), then set:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+TURSO_DATABASE_URL=libsql://your-db.turso.io
+TURSO_AUTH_TOKEN=your-token
+```
 
-## Deploy on Vercel
+#### Cloudflare R2
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Create an R2 bucket and API token in the [Cloudflare dashboard](https://dash.cloudflare.com), then set:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+R2_ACCOUNT_ID=your-account-id
+R2_ACCESS_KEY_ID=your-access-key
+R2_SECRET_ACCESS_KEY=your-secret-key
+R2_BUCKET_NAME=your-bucket
+```
+
+#### WorkOS
+
+Create a project at [workos.com](https://workos.com), then set:
+
+```
+WORKOS_CLIENT_ID=client_...
+WORKOS_API_KEY=sk_test_...
+WORKOS_COOKIE_PASSWORD=<generate with: openssl rand -base64 24>
+NEXT_PUBLIC_WORKOS_REDIRECT_URI=http://localhost:3000/callback
+```
+
+Add `http://localhost:3000/callback` as an allowed redirect URI in your WorkOS dashboard under AuthKit > Redirects.
+
+### 3. Push the database schema
+
+```bash
+pnpm db:push
+```
+
+### 4. Start the dev server
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) — you should see the landing page with Sign In / Sign Up buttons.
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start dev server (Turbopack) |
+| `pnpm build` | Production build |
+| `pnpm start` | Start production server |
+| `pnpm lint` | Run ESLint |
+| `pnpm db:generate` | Generate Drizzle migrations |
+| `pnpm db:migrate` | Run Drizzle migrations |
+| `pnpm db:push` | Push schema directly to database |
+| `pnpm db:studio` | Open Drizzle Studio |
+
+## Project Structure
+
+```
+src/
+├── app/                # Next.js App Router pages and layouts
+│   ├── callback/       # WorkOS auth callback route
+│   ├── globals.css     # Tailwind + ShadCN theme
+│   ├── layout.tsx      # Root layout
+│   └── page.tsx        # Home page
+├── db/
+│   ├── index.ts        # Drizzle database client
+│   └── schema.ts       # Database schema (users table)
+├── lib/
+│   ├── r2.ts           # Cloudflare R2 helpers
+│   └── utils.ts        # ShadCN utility (cn)
+└── proxy.ts            # WorkOS auth proxy
+```
+
+## Adding ShadCN Components
+
+```bash
+pnpm dlx shadcn@latest add button
+```
+
+See the [ShadCN docs](https://ui.shadcn.com/) for available components.

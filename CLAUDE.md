@@ -21,7 +21,7 @@
 - `src/app/` — Next.js App Router pages and layouts
 - `src/db/` — Drizzle schema (`schema.ts`) and client (`index.ts`)
 - `src/lib/` — Shared utilities (`utils.ts`, `r2.ts`)
-- `src/middleware.ts` — WorkOS auth middleware
+- `src/proxy.ts` — WorkOS auth proxy (Next.js 16 convention, replaces middleware.ts)
 - `drizzle.config.ts` — Drizzle Kit configuration
 - `drizzle/` — Generated migrations
 
