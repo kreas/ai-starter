@@ -171,5 +171,17 @@ This project includes Claude Code skills for common workflows:
 | Skill | Description |
 | ----- | ----------- |
 | `/setup-project` | Guided environment setup |
+| `/code-review` | Review code for DRY violations, prop drilling, hooks/context issues, and test coverage |
+| `/preflight` | Run build, tests, and lint to confirm code is clean |
+| `/pr-ready` | Final cleanup scan: debug statements, dead code, component structure, quality checks |
 | `/commit` | Atomic commit workflow |
 | `/pr` | Create a GitHub pull request |
+
+### Recommended Workflow
+
+1. `/code-review` — find structural and quality issues
+2. Fix the issues found
+3. `/preflight` — make sure build, tests, and lint pass
+4. `/pr-ready` — final cleanliness scan before committing
+5. `/commit` — create atomic commits
+6. `/pr` — open a pull request
